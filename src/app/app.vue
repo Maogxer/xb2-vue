@@ -1,12 +1,25 @@
 <template>
   <h3> {{ name }} </h3>
+
   {{ processStatus }}
   <button v-on:click="resetName">重置</button>
   <button @click="setName">设置</button>
+
+  <div class="menu">
+    <div :class="['menu-item', {active: currentItem == index}]"
+         @click="currentItem = index"
+         v-for="(item, index) in menuItems"
+         :key="index">{{item}}</div>
+  </div>
+
   <div v-for="(post, index) in postList"
        :key="post.id">
     {{index + 1}} {{post.content}} - <small>{{post.author}}</small>
   </div>
+
+  <div v-if='visible'>隐藏的内容!</div>
+  <button @click="visible = !visible">{{visible ? '隐藏' : '显示'}}</button>
+
 </template>
 
 <script>
@@ -14,7 +27,9 @@ export default {
   data () {
     return {
       name: 'NINGHAO',
-
+      visible: false,
+      menuItems: ['首页', '热门', '发布'],
+      currentItem: 0,
       postList: [
         {
           id: 1,
@@ -70,5 +85,14 @@ export default {
 <style scoped>
 button {
   margin: 4px;
+}
+
+.menu {
+  display: flex;
+  gap: 16px;
+}
+
+.active {
+  color: #6435c9;
 }
 </style>
