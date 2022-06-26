@@ -5,6 +5,7 @@
   <button v-on:click="resetName">重置</button>
   <button @click="setName">设置</button>
 
+  <!-- 绑定 class -->
   <div class="menu">
     <div :class="['menu-item', {active: currentItem == index}]"
          @click="currentItem = index"
@@ -12,11 +13,13 @@
          :key="index">{{item}}</div>
   </div>
 
+  <!-- v-for：在 Vue 组件里显示内容列表 -->
   <div v-for="(post, index) in postList"
        :key="post.id">
     {{index + 1}} {{post.content}} - <small>{{post.author}}</small>
   </div>
 
+  <!-- v-if：按条件显示内容 -->
   <div v-if='visible'>隐藏的内容!</div>
   <button @click="visible = !visible">{{visible ? '隐藏' : '显示'}}</button>
 
