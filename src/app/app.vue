@@ -1,7 +1,7 @@
 <template>
   <h3> {{ name }} </h3>
   <input type="text"
-         @input="onInputContent" />
+         @change="onChangeContent" />
 </template>
 
 <script>
@@ -13,8 +13,8 @@ export default {
   },
 
   methods: {
-    onInputContent (event) {
-      console.log(event);
+    onChangeContent (event) {
+      console.log(event.target.value)
     }
   }
 }
