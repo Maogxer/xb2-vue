@@ -1,7 +1,11 @@
 <template>
   <h3> {{ name }} </h3>
+  <!-- <input type="text"
+         v-model="content" /> -->
   <input type="text"
-         @keyup.enter="onKeyupInput" />
+         :value="content"
+         @input="content = $event.target.value" />
+  <span>→ Content: {{ content }}</span>
 </template>
 
 <script>
@@ -9,13 +13,7 @@ export default {
   data () {
     return {
       name: 'NINGHAO',
-    }
-  },
-
-  methods: {
-    onKeyupInput (event) {
-      //   if (event.key === 'Enter')
-      console.log('回车！')
+      content: '天地玄黄'
     }
   }
 }
