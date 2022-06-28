@@ -1,7 +1,8 @@
 <template>
   <h3> {{ name }} </h3>
   <input type="text"
-         v-model.lazy="content" />
+         v-model.number="content"
+         @change="onChangeContent" />
   <span>→ Content: {{ content }}</span>
 </template>
 
@@ -10,7 +11,17 @@ export default {
   data () {
     return {
       name: 'NINGHAO',
-      content: '天地玄黄'
+      content: 0
+    }
+  },
+
+  created () {
+    console.log('content 数据的类型（组件创建时）：', typeof this.content);
+  },
+
+  methods: {
+    onChangeContent () {
+      console.log('content 数据的类型（元素变化时）：', typeof this.content)
     }
   }
 }
