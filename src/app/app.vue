@@ -1,27 +1,27 @@
 <template>
   <h3> {{ name }} </h3>
-  <label for="tag-1">
-    <input id="tag-1"
-           type="checkbox"
-           value="大明湖"
-           v-model="tags" />
-    大明湖
+  <label for="subscription-annual">
+    <input id="subscription-annual"
+           type="radio"
+           value="annual"
+           v-model="subscription" />
+    一年
   </label>
-  <label for="tag-2">
-    <input id="tag-2"
-           type="checkbox"
-           value="黑虎泉"
-           v-model="tags" />
-    黑虎泉
+  <label for="subscription-quarterly">
+    <input id="subscription-quarterly"
+           type="radio"
+           value="quarterly"
+           v-model="subscription" />
+    季度
   </label>
-  <label for="tag-3">
-    <input id="tag-3"
-           type="checkbox"
-           value="趵突泉"
-           v-model="tags" />
-    趵突泉
+  <label for="subscription-monthly">
+    <input id="subscription-monthly"
+           type="radio"
+           value="monthly"
+           v-model="subscription" />
+    按月
   </label>
-  <span>→ Tags: {{ tags }}</span>
+  <span>→ Subscription: {{ subscription }}</span>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       name: 'NINGHAO',
-      tags: []
+      subscription: 'annual'
     }
   }
 }
