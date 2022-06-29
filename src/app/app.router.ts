@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Index from './components/index.vue';
 import About from './components/about.vue';
+import postRoutes from '@/post/post.routes';
 
 /**
  * 定义路由
@@ -23,7 +24,8 @@ const routes: Array<RouteRecordRaw> = [
       console.log(to);
       return '/about';
     }
-  }
+  },
+  ...postRoutes
 ];
 
 /**
