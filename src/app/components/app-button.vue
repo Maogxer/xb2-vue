@@ -31,7 +31,7 @@ export default {
   border-radius: 3px;
 }
 
-.button.active {
+.button:active {
   opacity: 0.8;
 }
 </style>
