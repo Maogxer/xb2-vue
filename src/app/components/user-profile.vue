@@ -1,6 +1,9 @@
 <template>
-  <component :is="currentComponent"></component>
+  <keep-alive>
+    <component :is="currentComponent"></component>
+  </keep-alive>
   <small @click="onClickHintText">{{ hintText }}</small>
+
 </template>
 
 <script>
