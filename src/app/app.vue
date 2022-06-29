@@ -6,7 +6,7 @@
         <router-link class="menu-item"
                      to="/">首页</router-link>
         <router-link class="menu-item"
-                     to="/about">关于</router-link>
+                     :to="{name: 'about'}">关于</router-link>
       </div>
     </div>
     <div class="page-body">
