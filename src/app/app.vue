@@ -1,6 +1,8 @@
 <template>
   <h3> {{ name }} </h3>
-  <AppButton text="确定"></AppButton>
+  <AppButton text="确定"
+             @tap="onTapAppButton"
+             @init="onInitAppButton"></AppButton>
   <AppButton />
   <app-button></app-button>
   <app-button />
@@ -16,6 +18,16 @@ export default {
     return {
       name: 'NINGHAO',
     };
+  },
+
+  methods: {
+    onTapAppButton (text) {
+      console.log("On Tap App Button: " + text);
+    },
+
+    onInitAppButton () {
+      console.log("On Init App Button");
+    }
   },
 
   components: { AppButton, AppDemoButton }
