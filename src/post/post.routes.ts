@@ -7,7 +7,7 @@ import PostIndex from './index/post-index.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/posts',
-    name: 'postsIndex',
+    name: 'postIndex',
     component: PostIndex
   }
 ];
