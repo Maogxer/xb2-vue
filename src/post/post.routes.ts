@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import PostIndex from './index/post-index.vue';
 import PostShow from './show/post-show.vue';
+import PostMeta from './show/post-meta.vue';
 
 /**
  * 定义路由
@@ -14,7 +15,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/posts/:postId',
     name: 'PostShow',
-    component: PostShow
+    component: PostShow,
+    children: [
+      {
+        path: 'meta',
+        component: PostMeta
+      }
+    ]
   }
 ];
 
