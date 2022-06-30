@@ -9,6 +9,7 @@ import postRoutes from '@/post/post.routes';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'home',
     component: Index
   },
   {
@@ -34,6 +35,21 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+/**
+ * 导航守卫
+ */
+router.beforeEach((to, from, next) => {
+  console.log('👮 ');
+  console.log('to: ', to);
+  console.log('from: ', from);
+
+  if (to.name === 'postIndex') {
+    next('/');
+  } else {
+    next();
+  }
 });
 
 /**
