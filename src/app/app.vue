@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
   data () {
@@ -15,11 +15,15 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['setName']),
+
     onClickName () {
       if (this.$store.state.name === '宁皓网') {
-        this.$store.commit('setName', 'NINGHAO')
+        // this.$store.commit('setName', 'NINGHAO')
+        this.setName('NINHAO')
       } else {
-        this.$store.commit('setName', '宁皓网')
+        // this.$store.commit('setName', '宁皓网')
+        this.setName('宁皓网')
       }
     }
   }
