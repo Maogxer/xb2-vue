@@ -6,10 +6,10 @@
         <div class="card-subtitle">Transition & Animation</div>
       </div>
       <div class="card_content">
-        <div class="emoji">🌴</div>
+        <div :class="['emoji', { hidden: !isActive}]">🌴</div>
       </div>
       <div class="card_action">
-        <button>请按这里</button>
+        <button @click="isActive = !isActive">请按这里</button>
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@ export default {
   data () {
     return {
       name: 'NINGHAO',
+      isActive: true
     };
   }
 }
