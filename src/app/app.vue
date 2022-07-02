@@ -33,7 +33,7 @@ export default {
     onClickName () {
       if (this.$store.state.name === '宁皓网') {
         // this.$store.commit('setName', 'NINGHAO')
-        this.setName('NINHAO')
+        this.setName('NINGHAO')
       } else {
         // this.$store.commit('setName', '宁皓网')
         this.setName('宁皓网')
