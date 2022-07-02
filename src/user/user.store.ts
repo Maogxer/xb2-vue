@@ -9,8 +9,16 @@ export interface UserState {
  * 创建 Store
  */
 const store: Module<UserState, RootState> = {
+  namespaced: true,
+
   state: {
     currentUser: ''
+  },
+
+  getters: {
+    currentUser(state) {
+      return state.currentUser;
+    }
   },
 
   mutations: {
