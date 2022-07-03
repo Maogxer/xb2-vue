@@ -6,21 +6,10 @@
         <div class="card-subtitle">Transition & Animation</div>
       </div>
       <div class="card_content">
-        <transition-group name="custom"
-                          leave-active-class="animate__animated animate__swing">
-          <div class="emoji"
-               v-for="emoji in emojiList"
-               :key="emoji">
-            {{ emoji }}
-          </div>
-        </transition-group>
+        <div class="emoji">{{ animateNumber }}</div>
       </div>
       <div class="card_action">
-        <button @click="shuffle"
-                :class="{ active: isActive }">
-          请按这里
-        </button>
-        <button @click="pop"
+        <button @click="number = number + 10"
                 :class="{ active: isActive }">
           请按这里
         </button>
@@ -35,24 +24,39 @@
 
 <script>
 import _ from 'lodash';
+import gsap from 'gsap';
 
 export default {
   data () {
     return {
       name: 'NINGHAO',
       isActive: true,
-      emojiList: ['❄️', '⛈️', '🌞']
+      emojiList: ['❄️', '⛈️', '🌞'],
+      number: 0,
+      tweenedNumber: 0
     };
+  },
+
+  computed: {
+    animateNumber () {
+      return this.tweenedNumber.toFixed(0);
+    }
+  },
+
+  watch: {
+    number (newValue) {
+      gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue })
+    }
   },
 
   methods: {
     shuffle () {
       this.emojiList = _.shuffle(this.emojiList);
-    },
-
-    pop () {
-      this.emojiList.pop();
     }
+  },
+
+  pop () {
+    this.emojiList.pop();
   }
 }
 </script>
