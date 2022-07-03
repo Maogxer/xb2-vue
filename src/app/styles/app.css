@@ -82,3 +82,10 @@
     opacity: 0;
     transform: translateX(30px);
 }
+.pules-enter-active {
+    animation: pules 1s;
+}
+
+.pules-leave-active {
+    animation: pules 1s;
+}
