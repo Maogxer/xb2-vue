@@ -6,7 +6,9 @@
         <div class="card-subtitle">Transition & Animation</div>
       </div>
       <div class="card_content">
-        <transition name="pules">
+        <transition name="custom-classes"
+                    enter-active-class="animate__animated animate__tada"
+                    leave-active-class="animate__animated animate__bounce">
           <div class="emoji"
                v-if="isActive">👻</div>
         </transition>
@@ -37,4 +39,5 @@ export default {
 <style scoped>
 @import './styles/app.css';
 @import './styles/card.css';
+@import './styles/animate.css';
 </style>
