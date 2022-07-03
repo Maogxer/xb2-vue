@@ -89,3 +89,7 @@
 .pules-leave-active {
     animation: pules 1s;
 }
+
+.v-move {
+    transition: 0.5s;
+}
