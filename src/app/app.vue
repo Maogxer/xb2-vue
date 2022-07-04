@@ -3,9 +3,12 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   setup () {
-    const name = 'NINGHAO';
+    const name = ref('NINGHAO');
+    console.log(name.value);
 
     return {
       name
