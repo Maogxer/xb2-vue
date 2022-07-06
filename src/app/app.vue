@@ -20,16 +20,13 @@ export default {
     };
   },
 
-  created () {
-    axios.get('http://127.0.0.1:3000/posts1').then(response => {
-      console.log(response);
+  async created () {
+    try {
+      const response = await axios.get('http://127.0.0.1:3000/posts');
       this.posts = response.data;
-    }).catch(error => {
-      console.log(error.message);
-      console.log(error.response);
-
+    } catch (error) {
       this.errorMessage = error.message;
-    })
+    }
   }
 }
 </script>
