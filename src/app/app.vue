@@ -3,15 +3,21 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   setup () {
     const name = ref('NINGHAO');
 
     const changeName = () => {
-      name.value = '宁皓网'
-    }
+      name.value = '宁皓网';
+    };
+
+    // 生命周期
+    onMounted(() => {
+      console.log('mounted')
+    })
+
 
     return {
       name,
