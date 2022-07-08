@@ -6,6 +6,7 @@
 
   <div v-if="currentUser">
     <div>{{ currentUser.name }}</div>
+    <button @click="logout">退出</button>
   </div>
 
   <input type="text"
@@ -76,6 +77,14 @@ export default {
       this.errorMessage = error.data.message;
 
       console.log(error.data)
+    },
+
+    logout () {
+      this.token = '';
+      this.currentUser = null;
+
+      localStorage.removeItem('tid');
+      localStorage.removeItem('uid');
     },
 
     async getCurrentUser (userId) {
