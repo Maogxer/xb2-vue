@@ -1,9 +1,15 @@
 <template>
   <h3> {{ name }} </h3>
-  <UserLogin />
+  <UserLogin v-if="!isLoggedIn"
+             @login-success="onLoginSuccess"
+             @login-error="onLoginError" />
+
   <input type="text"
+         v-if="isLoggedIn"
          v-model="title"
-         @keyup.enter="createPost" />
+         @keyup.enter="createPost"
+         placeholder="输入内容标题" />
+
   <div>{{ errorMessage}}</div>
   <div v-for="post in posts"
        :key="post.id">
@@ -31,11 +37,27 @@ export default {
     };
   },
 
+  computed: {
+    isLoggedIn () {
+      return this.token ? true : false
+    }
+  },
+
   async created () {
     this.getPosts();
   },
 
   methods: {
+    onLoginSuccess (data) {
+      this.token = data.token;
+    },
+
+    onLoginError (error) {
+      this.errorMessage = error.data.message;
+
+      console.log(error.data)
+    },
+
     async getPosts () {
       try {
         const response = await apiHttpClient.get('/posts');
