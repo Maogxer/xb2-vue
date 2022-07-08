@@ -20,6 +20,16 @@
          @change="onChangeFile"
          accept="image/png, image/jpeg, image/jpg" />
 
+  <div class="drag-zone"
+       @dragover.prevent
+       @drop.prevent="onDropDragZone">
+    <div>把图像文件拖放到这里</div>
+  </div>
+
+  <div v-if="imageUploadProgress">
+    <span class="image-upload-progress">{{ imageUploadProgress + '%' }}</span>
+  </div>
+
   <div v-if="imagePreviewUrl">
     <img class="image-preview"
          :src="imagePreviewUrl" />
@@ -52,6 +62,7 @@ export default {
       currentUser: null,
       file: null,
       imagePreviewUrl: null,
+      imageUploadProgress: null
     };
   },
 
@@ -123,6 +134,22 @@ export default {
       };
     },
 
+    onDropDragZone (event) {
+      console.log(event.dataTransfer.files);
+
+      const file = event.dataTransfer.files[0];
+
+      if (file) {
+        this.file = file;
+
+        // 设置内容标题
+        this.title = file.name.split('.')[0];
+
+        // 生成预览图像
+        this.createImagePreview(file);
+      }
+    },
+
     async createFile (file, postId) {
       // 创建表单
       const formData = new FormData();
@@ -138,6 +165,14 @@ export default {
           {
             headers: {
               Authorization: "Bearer " + this.token
+            },
+
+            onUploadProgress: event => {
+              console.log(event);
+
+              const { loaded, total } = event;
+
+              this.imageUploadProgress = Math.round((loaded * 100) / total);
             }
           });
 
@@ -145,6 +180,7 @@ export default {
         this.file = null;
         this.imagePreviewUrl = null;
         this.$refs.file.value = '';
+        this.imageUploadProgress = null;
 
         console.log(response.data);
       } catch (error) {
@@ -219,14 +255,12 @@ export default {
 
     async deletePost (postId) {
       try {
-        // const response = await apiHttpClient.delete(`/posts/${postId}`, {
         await apiHttpClient.delete(`/posts/${postId}`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           }
         });
 
-        // console.log(response.data);
         this.getPosts();
       } catch (error) {
         // this.errorMessage = error.message;
