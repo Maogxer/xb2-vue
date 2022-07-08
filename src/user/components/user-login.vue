@@ -38,7 +38,7 @@ export default {
 
         this.$emit('login-success', response.data);
       } catch (error) {
-        console.log(error.message);
+        console.log(error.response);
 
         this.$emit('login-error', error.response);
       }
