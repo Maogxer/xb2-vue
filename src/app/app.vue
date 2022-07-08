@@ -10,6 +10,7 @@
   </div>
 
   <input type="text"
+         ref="file"
          v-if="isLoggedIn"
          v-model="title"
          @keyup.enter="createPost"
@@ -122,6 +123,35 @@ export default {
       };
     },
 
+    async createFile (file, postId) {
+      // 创建表单
+      const formData = new FormData();
+
+      // 添加字段
+      formData.append('file', file);
+
+      // 上传文件
+      try {
+        const response = await apiHttpClient.post(
+          `files?post=${postId}`,
+          formData,
+          {
+            headers: {
+              Authorization: "Bearer " + this.token
+            }
+          });
+
+        // 清理
+        this.file = null;
+        this.imagePreviewUrl = null;
+        this.$refs.file.value = '';
+
+        console.log(response.data);
+      } catch (error) {
+        this.errorMessage = error.message;
+      }
+    },
+
     async getCurrentUser (userId) {
       try {
         const response = await apiHttpClient.get(`/users/${userId}`);
@@ -155,6 +185,10 @@ export default {
         });
 
         console.log(response.data);
+
+        if (this.file) {
+          this.createFile(this.file, response.data.insertId);
+        }
 
         this.title = '';
         this.getPosts();
