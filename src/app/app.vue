@@ -1,5 +1,6 @@
 <template>
   <h3> {{ name }} </h3>
+  <UserLogin />
   <input type="text"
          v-model="title"
          @keyup.enter="createPost" />
@@ -16,7 +17,8 @@
 </template>
 
 <script>
-import { apiHttpClient } from "./app.service";
+import { apiHttpClient } from "@/app/app.service";
+import UserLogin from "@/user/components/user-login.vue";
 
 export default {
   data () {
@@ -24,10 +26,6 @@ export default {
       name: 'NINGHAO',
       posts: [],
       errorMessage: '',
-      user: {
-        name: '李白',
-        password: '123123'
-      },
       token: '',
       title: '',
     };
@@ -35,16 +33,6 @@ export default {
 
   async created () {
     this.getPosts();
-
-    // 用户登录  
-    try {
-      const response = await apiHttpClient.post('/login', this.user);
-      this.token = response.data.token;
-
-      console.log(response.data);
-    } catch (error) {
-      this.errorMessage = error.message;
-    }
   },
 
   methods: {
@@ -111,6 +99,10 @@ export default {
         this.errorMessage = error.message;
       }
     }
+  },
+
+  components: {
+    UserLogin
   }
 }
 </script>
