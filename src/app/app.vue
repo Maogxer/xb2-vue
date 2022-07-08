@@ -143,21 +143,25 @@ export default {
 
         this.getPosts();
       } catch (error) {
-        this.errorMessage = error.message;
+        // this.errorMessage = error.message;
+        this.errorMessage = error.response.data.message;
       }
     },
 
     async deletePost (postId) {
       try {
+        // const response = await apiHttpClient.delete(`/posts/${postId}`, {
         await apiHttpClient.delete(`/posts/${postId}`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           }
         });
 
+        // console.log(response.data);
         this.getPosts();
       } catch (error) {
-        this.errorMessage = error.message;
+        // this.errorMessage = error.message;
+        this.errorMessage = error.response.data.message;
       }
     }
   },
