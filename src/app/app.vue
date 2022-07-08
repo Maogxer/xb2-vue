@@ -19,6 +19,11 @@
          @change="onChangeFile"
          accept="image/png, image/jpeg, image/jpg" />
 
+  <div v-if="imagePreviewUrl">
+    <img class="image-preview"
+         :src="imagePreviewUrl" />
+  </div>
+
   <div>{{ errorMessage}}</div>
   <div v-for="post in posts"
        :key="post.id">
@@ -44,7 +49,8 @@ export default {
       token: '',
       title: '',
       currentUser: null,
-      file: null
+      file: null,
+      imagePreviewUrl: null,
     };
   },
 
@@ -100,7 +106,20 @@ export default {
         this.file = file;
 
         this.title = file.name.split('.')[0];
+
+        // 生成预览
+        this.createImagePreview(file);
       }
+    },
+
+    createImagePreview (file) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = event => {
+        this.imagePreviewUrl = event.target.result;
+      };
     },
 
     async getCurrentUser (userId) {
