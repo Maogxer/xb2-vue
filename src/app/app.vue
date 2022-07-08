@@ -20,9 +20,11 @@
          @change="onChangeFile"
          accept="image/png, image/jpeg, image/jpg" />
 
-  <div class="drag-zone"
+  <div :class="['drag-zone', { active: dragZoneActive }]"
        @dragover.prevent
-       @drop.prevent="onDropDragZone">
+       @drop.prevent="onDropDragZone"
+       @dragenter="dragZoneActive = true"
+       @dragleave="dragZoneActive = false">
     <div>把图像文件拖放到这里</div>
   </div>
 
@@ -62,7 +64,8 @@ export default {
       currentUser: null,
       file: null,
       imagePreviewUrl: null,
-      imageUploadProgress: null
+      imageUploadProgress: null,
+      dragZoneActive: false
     };
   },
 
@@ -136,6 +139,8 @@ export default {
 
     onDropDragZone (event) {
       console.log(event.dataTransfer.files);
+
+      this.dragZoneActive = false;
 
       const file = event.dataTransfer.files[0];
 
