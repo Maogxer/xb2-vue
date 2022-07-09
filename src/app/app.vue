@@ -8,6 +8,10 @@ export default {
     return {
       name: 'NINGHAO',
     };
+  },
+
+  created () {
+    console.log(this.$store.state);
   }
 }
 </script>
