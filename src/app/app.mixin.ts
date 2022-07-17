@@ -34,7 +34,7 @@ export const titleMixin: ComponentOptions = {
     setTitle(this);
   },
 
-  update() {
+  updated() {
     setTitle(this);
   }
 };
