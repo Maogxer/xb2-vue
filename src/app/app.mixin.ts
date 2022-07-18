@@ -22,6 +22,8 @@ const setTitle = (vm: ComponentPublicInstance) => {
   }
 
   if (vm.$route.path === '/') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     document.title = APP_NAME;
   }
 };
